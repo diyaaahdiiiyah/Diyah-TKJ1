@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biodata Interaktif - Nor Maulidiyah</title>
+    
+    <!-- Tailwind CSS for rapid UI development -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@700&family=Inter:wght@400;600&family=Noto+Sans+Javanese&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS for theme and styling -->
+    <style>
+        /* Define custom properties for Japanese Fantasy theme colors */
+        :root {
+            --bg-dark: #1a1a2e;      /* Deep blue night sky */
+            --bg-paper: #f8f6f2;     /* Washi paper */
+            --text-ink: #333333;
+            --accent-pink: #ffb6c1;    /* Sakura pink */
+            --accent-red: #b82c4a;     /* Crimson Red */
+            --accent-red-dark: #9c253f;
+            --border-line: #e0e0e0;
+        }
+
+        /* Apply fonts and background */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-ink);
+            background-image: url('https://www.transparenttextures.com/patterns/stardust.png'); /* Starry night */
+        }
+
+        /* Headings font */
+        h1, h2, h3 {
+            font-family: 'Shippori Mincho', serif;
+            color: #2c3e50;
+        }
+        
+        /* Javanese script font */
+        .aksara-jawa {
+            font-family: 'Noto Sans Javanese', sans-serif;
+            font-size: 1.2rem;
+            line-height: 2.5rem;
+        }
+
+        /* Arabic text alignment and font */
+        .arabic {
+            direction: rtl;
+            font-family: 'Tahoma', sans-serif;
+        }
+
+        /* Main container styled as a scroll or canvas */
+        .scroll-paper {
+            background-color: var(--bg-paper);
+            box-shadow: 0 10px 40px rgba(255, 182, 193, 0.25); /* Soft pink glow */
+            border: 1px solid var(--accent-pink);
+        }
+        
+        /* Language switcher styles */
+        .lang-switcher button {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+            color: #555;
+        }
+        .lang-switcher button.active {
+            font-weight: 700;
+            color: var(--accent-red);
+            border-bottom-color: var(--accent-red);
+        }
+        .lang-switcher button:hover {
+            color: var(--accent-red-dark);
+        }
+
+        /* Chart glow effect */
+        .glowing-chart {
+            filter: drop-shadow(0 0 15px var(--accent-pink));
+        }
+        
+        /* Custom list style like sakura petals */
+        .fantasy-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 8px;
+        }
+        .fantasy-list li::before {
+            content: '🌸';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 1rem;
+            line-height: 1.2rem;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto scroll-paper rounded-lg p-6 md:p-10">
+        
+        <!-- Language Switcher -->
+        <div class="lang-switcher flex justify-center space-x-4 mb-8 pb-2 border-b border-gray-200">
+            <button data-lang="id" class="active">ID</button>
+            <button data-lang="en">EN</button>
+            <button data-lang="jv_latin">JV</button>
+            <button data-lang="jv_aksara">ꦧꦱꦗꦮ</button>
+            <button data-lang="ar">AR</button>
+        </div>
+
+        <!-- 1. Header -->
+        <header class="text-center mb-10 border-b pb-6 border-dashed border-gray-300">
+            <img src="gg" alt="Foto Nor Maulidiyah" class="w-32 h-32 rounded-full mx-auto mb-4 ring-4 ring-offset-4 ring-pink-200">
+            <h1 id="nama-lengkap" class="text-4xl font-bold text-gray-800">Nor Maulidiyah</h1>
+            <p id="status-sekolah" class="text-xl text-gray-500 mt-2">Siswi SMK Ma'arif NU Tirto</p>
+            <p id="nama-lengkap-jawa" class="aksara-jawa text-gray-600 mt-2 hidden">ꦤꦺꦴꦂ​ꦩꦻꦴꦭꦶꦢꦶꦪꦃ</p>
+            <p id="nama-lengkap-arab" class="arabic text-2xl text-gray-600 mt-2 hidden">نور مولودية</p>
+        </header>
+
+        <main class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <div class="md:col-span-2 space-y-12">
+                <!-- 2. Biodata Diri -->
+                <section>
+                    <h2 class="text-2xl font-bold mb-4 border-b-2 border-pink-100 pb-2" data-lang-id="Biodata Diri" data-lang-en="Personal Info" data-lang-jv_latin="Biodata Pribadi" data-lang-jv_aksara="ꦧꦶꦪꦺꦴꦢꦠ​ꦥꦿꦶꦧꦢꦶ" data-lang-ar="المعلومات الشخصية">Biodata Diri</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700">
+                        <div><strong><span data-lang-id="Nama" data-lang-en="Name" data-lang-jv_latin="Asma" data-lang-jv_aksara="ꦲꦱ꧀ꦩ" data-lang-ar="الاسم">Nama</span>:</strong> Nor Maulidiyah</div>
+                        <div><strong><span data-lang-id="TTL" data-lang-en="POB, DOB" data-lang-jv_latin="Papan, Tanggal Lair" data-lang-jv_aksara="ꦥꦥꦤ꧀​ꦠꦁꦒꦭ​ꦭꦲꦶꦂ" data-lang-ar="مكان وتاريخ الميلاد">Tempat, Tanggal Lahir</span>:</strong> Pekalongan, 28 Agustus 2009</div>
+                        <div><strong><span data-lang-id="Alamat" data-lang-en="Address" data-lang-jv_latin="Alamat" data-lang-jv_aksara="ꦲꦭꦩꦠ꧀" data-lang-ar="العنوان">Alamat</span>:</strong> desa mijen , Tirto, Kab.Pekalongan</div>
+                        <div><strong><span data-lang-id="Jenis Kelamin" data-lang-en="Gender" data-lang-jv_latin="Jenis Kelamin" data-lang-jv_aksara="ꦗꦼꦤꦶꦱ​ꦏꦼꦭꦩꦶꦤ꧀" data-lang-ar="الجنس">Jenis Kelamin</span>:</strong> <span data-lang-id="Perempuan" data-lang-en="Female" data-lang-jv_latin="Wadon" data-lang-jv_aksara="ꦮꦢꦺꦴꦤ꧀" data-lang-ar="أنثى">Perempuan</span></div>
+                        <div><strong><span data-lang-id="Agama" data-lang-en="Religion" data-lang-jv_latin="Agami" data-lang-jv_aksara="ꦲꦒꦩꦶ" data-lang-ar="الدين">Agama</span>:</strong> Islam</div>
+                        <div><strong><span data-lang-id="Status" data-lang-en="Status" data-lang-jv_latin="Status" data-lang-jv_aksara="ꦱ꧀ꦠꦠꦸꦱ꧀" data-lang-ar="الحالة">Status</span>:</strong> <span data-lang-id="Pelajar" data-lang-en="Student" data-lang-jv_latin="Siswa" data-lang-jv_aksara="ꦱꦶꦱ꧀ꮮ" data-lang-ar="طالبة">Pelajar</span></div>
+                        <div><strong><span data-lang-id="Cita-cita" data-lang-en="Ambition" data-lang-jv_latin="Gegayuhan" data-lang-jv_aksara="ꦒꦼꦒꦪꦸꦲꦤ꧀" data-lang-ar="الطموح">Cita-cita</span>:</strong> <span data-lang-id="Pramugari" data-lang-en="Flight Attendant" data-lang-jv_latin="Pramugari" data-lang-jv_aksara="ꦥꦿꦩꦸꦒꦫꦶ" data-lang-ar="مضيفة طيران">Pramugari</span></div>
+                        <div><strong>Email:</strong> lidiyahhhhh@gmail.com</div>
+                        <div><strong><span data-lang-id="No. Telepon" data-lang-en="Phone" data-lang-jv_latin="No. Telpon" data-lang-jv_aksara="ꦤꦺꦴ​ꦠꦺꦭ꧀ꦥꦺꦴꦤ꧀" data-lang-ar="رقم الهاتف">No. Telepon</span>:</strong> +62 878-****-****</div>
+                    </div>
+                </section>
+                
+                <!-- 3. Pendidikan -->
+                <section>
+                    <h2 class="text-2xl font-bold mb-4 border-b-2 border-pink-100 pb-2" data-lang-id="Pendidikan" data-lang-en="Education" data-lang-jv_latin="Pendhidhikan" data-lang-jv_aksara="ꦥꦼꦤ꧀ꦝꦶꦝꦶꦏꦤ꧀" data-lang-ar="التعليم">Pendidikan</h2>
+                    <ul class="fantasy-list">
+                        <li>MI SALAFIYAH Samborejo (2015-2021)</li>
+                        <li>SMP N 1 Tirto (2021-2024)</li>
+                        <li>SMK MA'ARIF NU Tirto (2024 - <span data-lang-id="Sekarang" data-lang-en="Present" data-lang-jv_latin="Sakniki" data-lang-jv_aksara="ꦱꦏ꧀ꦤꦶꦏꦶ" data-lang-ar="الحاضر">Sekarang</span>)</li>
+                    </ul>
+                </section>
+
+                <!-- 4. Keterampilan -->
+                <section>
+                    <h2 class="text-2xl font-bold mb-4 border-b-2 border-pink-100 pb-2" data-lang-id="Keterampilan" data-lang-en="Skills" data-lang-jv_latin="Ketrampilan" data-lang-jv_aksara="ꦏꦼꦠꦿꦩ꧀ꦥꦶꦭꦤ꧀" data-lang-ar="المهارات">Keterampilan</h2>
+                    <ul class="fantasy-list">
+                        <li data-lang-id="Memiliki kemampuan mendesain grafis dengan Canva" data-lang-en="Proficient in graphic design using Canva" data-lang-jv_latin="Saged ngrancang grafis ngginakaken Canva" data-lang-jv_aksara="ꦱꦒꦼꦢ꧀​ꦔꦿꦚ꧀ꦕꦁ​ꦒꦿꦥ꦳ꦶꦱ꧀​ꦔꦒꦶꦤꦏꦏꦼꦤ꧀​ꦕꦤ꧀ꦮ" data-lang-ar="إجادة التصميم الجرافيكي باستخدام Canva">Memiliki kemampuan mendesain grafis dengan Canva</li>
+                        <li data-lang-id="Mampu menginstall Debian 11" data-lang-en="Able to install Debian 11" data-lang-jv_latin="Saged nginstal Debian 11" data-lang-jv_aksara="ꦱꦒꦼꦢ꧀​ꦔꦶꦤ꧀ꦱ꧀ꦠꦭ꧀​ꦢꦼꦧꦶꦪꦤ꧀​꧑꧑" data-lang-ar="القدرة على تثبيت Debian 11">Mampu menginstall Debian 11</li>
+                    </ul>
+                </section>
+                
+                <!-- 5. Pengalaman -->
+                <section>
+                    <h2 class="text-2xl font-bold mb-4 border-b-2 border-pink-100 pb-2" data-lang-id="Pengalaman" data-lang-en="Experience" data-lang-jv_latin="Pengalaman" data-lang-jv_aksara="ꦥꦼꦔꦭꦩꦤ꧀" data-lang-ar="الخبرة">Riwayat Hidup / Pengalaman</h2>
+                    <ul class="fantasy-list">
+                        <li data-lang-id="Menjadi panitia 17 Agustus" data-lang-en="Became an Independence Day committee member" data-lang-jv_latin="Dados panitia 17 Agustusan" data-lang-jv_aksara="ꦢꦢꦺꦴꦱ꧀​ꦥꦤꦶꦠꦶꦪ​꧑꧗​ꦄꦒꦸꦱ꧀ꦠꦸꦱꦤ꧀" data-lang-ar="عضو لجنة احتفالات يوم الاستقلال">Menjadi panitia 17 Agustus</li>
+                        <li data-lang-id="Berjualan di hari Minggu depan sekolah" data-lang-en="Selling goods on Sundays in front of the school" data-lang-jv_latin="Sadeyan ing dinten Minggu ngajeng sekolah" data-lang-jv_aksara="ꦱꦢꦺꦪꦤ꧀​ꦲꦶꦁ​ꦢꦶꦤ꧀ꦠꦼꦤ꧀​ꦩꦶꦁꦒꦸ​ꦔꦗꦼꦁ​ꦱꦼꦏꦺꦴꦭꦃ" data-lang-ar="البيع أيام الأحد أمام المدرسة">Berjualan di hari Minggu depan sekolah</li>
+                        <li data-lang-id="Mengikuti OSIS SMK" data-lang-en="Participating in the Vocational School Student Council (OSIS)" data-lang-jv_latin="Ndherek OSIS SMK" data-lang-jv_aksara="ꦤ꧀ꦝꦺꦫꦺꦏ꧀​ꦎꦱꦶꦱ꧀​ꦱ꧀ꦩꦏ" data-lang-ar="المشاركة في مجلس طلاب المدرسة المهنية">Mengikuti OSIS SMK</li>
+                    </ul>
+                </section>
+                
+                 <!-- 6. Prestasi -->
+                <section>
+                    <h2 class="text-2xl font-bold mb-4 border-b-2 border-pink-100 pb-2" data-lang-id="Prestasi" data-lang-en="Achievements" data-lang-jv_latin="Prestasi" data-lang-jv_aksara="ꦥꦿꦺꦱ꧀ꦠꦱꦶ" data-lang-ar="الإنجازات">Prestasi</h2>
+                    <ul class="fantasy-list">
+                        <li><strong data-lang-id="Akademik" data-lang-en="Academic" data-lang-jv_latin="Akademik" data-lang-jv_aksara="ꦲꦏꦢꦼꦩꦶꦏ꧀" data-lang-ar="أكاديمي">Akademik:</strong> <span data-lang-id="Peringkat 1 di TPQ Darussalam" data-lang-en="1st Rank at TPQ Darussalam" data-lang-jv_latin="Ranking 1 ing TPQ Darussalam" data-lang-jv_aksara="ꦫꦁꦏꦶꦁ​꧑​ꦲꦶꦁ​ꦠ꧀ꦥ꧀ꦐ​ꦢꦫꦸꦱ꧀ꦱꦭꦩ꧀" data-lang-ar="المركز الأول في معهد دار السلام لتعليم القرآن">Peringkat 1 di TPQ Darussalam</span></li>
+                        <li><strong data-lang-id="Non-Akademik" data-lang-en="Non-Academic" data-lang-jv_latin="Non-Akademik" data-lang-jv_aksara="ꦤꦺꦴꦤ꧀​ꦲꦏꦢꦼꦩꦶꦏ꧀" data-lang-ar="غير أكاديمي">Non-Akademik:</strong> <span data-lang-id="Juara lomba 17 Agustus" data-lang-en="Winner of the Independence Day competitions" data-lang-jv_latin="Juara lomba 17 Agustusan" data-lang-jv_aksara="ꦗꦸꦮꦫ​ꦭꦺꦴꦩ꧀ꦧ​꧑꧗​ꦄꦒꦸꦱ꧀ꦠꦸꦱꦤ꧀" data-lang-ar="الفوز في مسابقات يوم الاستقلال">Juara lomba 17 Agustus</span></li>
+                    </ul>
+                </section>
+            </div>
+
+            <div class="md:col-span-1 space-y-12">
+                <!-- 9. Moto -->
+                 <section>
+                    <h3 class="text-xl font-bold mb-3" data-lang-id="Moto Hidup" data-lang-en="Life Motto" data-lang-jv_latin="Motto Urip" data-lang-jv_aksara="ꦩꦺꦴꦠ꧀ꦠꦺꦴ​ꦲꦸꦫꦶꦥ꧀" data-lang-ar="شعار الحياة">Moto Hidup</h3>
+                    <p class="text-lg italic text-gray-700 bg-pink-50 p-4 rounded-md border-l-4 border-pink-300" data-lang-id='"Jadilah yang terbaik dari dirimu sendiri."' data-lang-en='"Be the best version of yourself."' data-lang-jv_latin='"Dadia versi paling apik saka awakmu dhewe."' data-lang-jv_aksara="꧋ꦢꦢꦶꦪ​ꦮ꦳ꦼꦂꦱꦶ​ꦥꦭꦶꦁ​ꦲꦥꦶꦏ꧀​ꦱꦏ​ꦲꦮꦏ꧀ꦩꦸ​ꦝꦺꦮꦺ꧉" data-lang-ar='"كن أفضل نسخة من نفسك."'>"Jadilah yang terbaik dari dirimu sendiri."</p>
+                </section>
+
+                <!-- 10. Minat -->
+                <section>
+                     <h2 class="text-2xl font-bold mb-4 border-b-2 border-pink-100 pb-2" data-lang-id="Minat" data-lang-en="Interests" data-lang-jv_latin="Minat" data-lang-jv_aksara="ꦩꦶꦤꦠ꧀" data-lang-ar="الاهتمامات">Minat</h2>
+                     <ul class="fantasy-list">
+                         <li data-lang-id="Menggambar: Suka menggambar pemandangan dan visual anime." data-lang-en="Drawing: Loves to draw landscapes and anime visuals." data-lang-jv_latin="Nggambar: Seneng nggambar pemandangan lan visual anime." data-lang-jv_aksara="ꦔ꧀ꦒꦩ꧀ꦧꦂꧣ​ꦱꦼꦤꦼꦁ​ꦔ꧀ꦒꦩ꧀ꦧꦂ​ꦥꦼꦩꦤ꧀ꦢꦔꦤ꧀​ꦭꦤ꧀​ꦮ꦳ꦶꦱꦸꦮꦭ꧀​ꦲꦤꦶꦩꦺ꧉" data-lang-ar="الرسم: أحب رسم المناظر الطبيعية ومرئيات الأنمي."><strong>Menggambar:</strong> Suka menggambar pemandangan dan visual anime.</li>
+                         <li data-lang-id="Teknologi: Tertarik mempelajari komputer, internet, dan jaringan." data-lang-en="Technology: Interested in learning about computers, the internet, and networks." data-lang-jv_latin="Teknologi: Tertarik sinau komputer, internet, lan jaringan." data-lang-jv_aksara="ꦠꦺꦏ꧀ꦤꦺꦴꦭꦺꦴꦒꦶꧣ​ꦠꦼꦂꦠꦫꦶꦏ꧀​ꦱꦶꦤꦲꦸ​ꦏꦺꦴꦩ꧀ꦥꦸꦠꦼꦂ꧈​ꦲꦶꦤ꧀ꦠꦼꦂꦤꦺꦠ꧀꧈​ꦭꦤ꧀​ꦗꦫꦶꦔꦤ꧀꧉" data-lang-ar="التكنولوجيا: مهتمة بتعلم أجهزة الكمبيوتر والإنترنت والشبكات."><strong>Teknologi:</strong> Tertarik mempelajari komputer, internet, dan jaringan.</li>
+                     </ul>
+                </section>
+                
+                <!-- 11. Harapan Masa Depan -->
+                <section>
+                    <h3 class="text-xl font-bold mb-3" data-lang-id="Harapan Masa Depan" data-lang-en="Future Hopes" data-lang-jv_latin="Pangarep-arep Ing Mbesuk" data-lang-jv_aksara="ꦥꦔꦉꦥ꧀​ꦲꦉꦥ꧀​ꦲꦶꦁ​ꦩ꧀ꦧꦼꦱꦸꦏ꧀" data-lang-ar="آمال المستقبل">Harapan Masa Depan</h3>
+                    <p class="italic text-gray-600" data-lang-id="Menjadi orang sukses dan membanggakan kedua orang tua saya." data-lang-en="To become a successful person and make my parents proud." data-lang-jv_latin="Dados tiyang sukses lan saged mbanggakaken tiyang sepuh kekalih." data-lang-jv_aksara="ꦢꦢꦺꦴꦱ꧀​ꦠꦶꦪꦁ​ꦱꦸꦏ꧀ꦱꦺꦱ꧀​ꦭꦤ꧀​ꦱꦒꦼꦢ꧀​ꦩ꧀ꦧꦁꦒꦏꦏꦼꦤ꧀​ꦠꦶꦪꦁ​ꦱꦼꦥꦸꦃ​ꦏꦼꦏꦭꦶꦃ꧉" data-lang-ar="أن أصبح شخصًا ناجحًا وأجعل والديّ فخورين بي.">"Menjadi orang sukses dan membanggakan kedua orang tua saya."</p>
+                </section>
+            </div>
+            
+            <div class="md:col-span-3 space-y-12">
+                 <!-- 8. Hobi -->
+                 <section>
+                    <h2 class="text-2xl font-bold mb-4 border-b-2 border-pink-100 pb-2" data-lang-id="Hobi" data-lang-en="Hobbies" data-lang-jv_latin="Hobi" data-lang-jv_aksara="ꦲꦺꦴꦧꦶ" data-lang-ar="الهوايات">Hobi</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2" data-lang-id="Distribusi Waktu Hobi" data-lang-en="Hobby Time Distribution" data-lang-jv_latin="Distribusi Wektu Hobi" data-lang-jv_aksara="ꦢꦶꦱ꧀ꦠꦿꦶꦧꦸꦱꦶ​ꦮꦼꦏ꧀ꦠꦸ​ꦲꦺꦴꦧꦶ" data-lang-ar="توزيع وقت الهوايات">Distribusi Waktu Hobi (%)</h3>
+                            <canvas id="hobbiesPieChart" class="glowing-chart"></canvas>
+                        </div>
+                        <div>
+                             <h3 class="text-lg font-semibold mb-2" data-lang-id="Tingkat Minat Hobi (1-10)" data-lang-en="Hobby Interest Level (1-10)" data-lang-jv_latin="Tingkat Minat Hobi (1-10)" data-lang-jv_aksara="ꦠꦶꦁꦏꦠ꧀​ꦩꦶꦤꦠ꧀​ꦲꦺꦴꦧꦶ​꧑꧇꧑꧐" data-lang-ar="مستوى الاهتمام بالهواية (1-10)">Tingkat Minat Hobi (1-10)</h3>
+                             <canvas id="hobbiesRadarChart"></canvas>
+                        </div>
+                    </div>
+                 </section>
+
+                 <!-- 7. Statistik Kegiatan -->
+                 <section>
+                    <h2 class="text-2xl font-bold mb-4 border-b-2 border-pink-100 pb-2" data-lang-id="Statistik Kegiatan Mingguan" data-lang-en="Weekly Activity Statistics" data-lang-jv_latin="Statistik Kagiyatan Minggon" data-lang-jv_aksara="ꦱ꧀ꦠꦠꦶꦱ꧀ꦠꦶꦏ꧀​ꦏꦒꦶꦪꦠꦤ꧀​ꦩꦶꦁꦒꦺꦴꦤ꧀" data-lang-ar="إحصائيات الأنشطة الأسبوعية">Statistik Kegiatan Mingguan (Jam)</h2>
+                    <canvas id="activityChart"></canvas>
+                 </section>
+
+                 <!-- 13. Tabel Data -->
+                 <section>
+                    <h2 class="text-2xl font-bold mb-4 border-b-2 border-pink-100 pb-2" data-lang-id="Ringkasan Data" data-lang-en="Data Summary" data-lang-jv_latin="Ringkesan Data" data-lang-jv_aksara="ꦫꦶꦁꦏꦼꦱꦤ꧀​ꦢꦠ" data-lang-ar="ملخص البيانات">Ringkasan Data</h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-pink-50">
+                                    <th class="p-3 border border-pink-200" data-lang-id="Kategori" data-lang-en="Category" data-lang-jv_latin="Kategori" data-lang-jv_aksara="ꦏꦠꦼꦒꦺꦴꦫꦶ" data-lang-ar="الفئة">Kategori</th>
+                                    <th class="p-3 border border-pink-200" data-lang-id="Keterangan" data-lang-en="Description" data-lang-jv_latin="Katrangan" data-lang-jv_aksara="ꦏꦠꦿꦔꦤ꧀" data-lang-ar="الوصف">Keterangan</th>
+                                    <th class="p-3 border border-pink-200" data-lang-id="Nilai" data-lang-en="Value" data-lang-jv_latin="Nilai" data-lang-jv_aksara="ꦤꦶꦭꦲꦶ" data-lang-ar="القيمة">Nilai</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="hover:bg-pink-50">
+                                    <td class="p-3 border border-pink-200 font-semibold" data-lang-id="Prestasi Akademik" data-lang-en="Academic Achievement" data-lang-jv_latin="Prestasi Akademik" data-lang-jv_aksara="ꦥꦿꦺꦱ꧀ꦠꦱꦶ​ꦲꦏꦢꦼꦩꦶꦏ꧀" data-lang-ar="الإنجاز الأكاديمي">Prestasi Akademik</td>
+                                    <td class="p-3 border border-pink-200" data-lang-id="Persentase dari total prestasi" data-lang-en="Percentage of total achievements" data-lang-jv_latin="Persentase saking total prestasi" data-lang-jv_aksara="ꦥꦼꦂꦱꦺꦤ꧀ꦠꦱꦼ​ꦱꦏꦶꦁ​ꦠꦺꦴꦠꦭ꧀​ꦥꦿꦺꦱ꧀ꦠꦱꦶ" data-lang-ar="النسبة المئوية من إجمالي الإنجازات">Persentase dari total prestasi</td>
+                                    <td class="p-3 border border-pink-200">50%</td>
+                                </tr>
+                                <tr class="hover:bg-pink-50">
+                                    <td class="p-3 border border-pink-200 font-semibold" data-lang-id="Rata-rata Kegiatan Harian" data-lang-en="Average Daily Activity" data-lang-jv_latin="Rata-rata Kagiyatan Saben Dinten" data-lang-jv_aksara="ꦫꦠ​ꦫꦠ​ꦏꦒꦶꦪꦠꦤ꧀​ꦱꦧꦼꦤ꧀​ꦢꦶꦤ꧀ꦠꦼꦤ꧀" data-lang-ar="متوسط النشاط اليومي">Rata-rata Kegiatan Harian</td>
+                                    <td class="p-3 border border-pink-200" data-lang-id="Total jam kegiatan dibagi 7 hari" data-lang-en="Total activity hours divided by 7 days" data-lang-jv_latin="Total jam kagiyatan dipara 7 dinten" data-lang-jv_aksara="ꦠꦺꦴꦠꦭ꧀​ꦗꦩ꧀​ꦏꦒꦶꦪꦠꦤ꧀​ꦢꦶꦥꦫ​꧗​ꦢꦶꦤ꧀ꦠꦼꦤ꧀" data-lang-ar="إجمالي ساعات النشاط مقسومًا على 7 أيام">Total jam kegiatan dibagi 7 hari</td>
+                                    <td class="p-3 border border-pink-200">20.43 <span data-lang-id="Jam/Hari" data-lang-en="Hours/Day" data-lang-jv_latin="Jam/Dinten" data-lang-jv_aksara="ꦗꦩ꧀​ꦢꦶꦤ꧀ꦠꦼꦤ꧀" data-lang-ar="ساعة/يوم">Jam/Hari</span></td>
+                                </tr>
+                                <tr class="hover:bg-pink-50">
+                                    <td class="p-3 border border-pink-200 font-semibold" data-lang-id="Hobi Favorit" data-lang-en="Favorite Hobbies" data-lang-jv_latin="Hobi Favorit" data-lang-jv_aksara="ꦲꦺꦴꦧꦶ​ꦥ꦳ꦮ꦳ꦺꦴꦫꦶꦠ꧀" data-lang-ar="الهوايات المفضلة">Hobi Favorit</td>
+                                    <td class="p-3 border border-pink-200" data-lang-id="Hobi dengan alokasi waktu terbanyak" data-lang-en="Hobbies with the most time allocation" data-lang-jv_latin="Hobi kanthi alokasi wektu paling kathah" data-lang-jv_aksara="ꦲꦺꦴꦧꦶ​ꦏꦤ꧀ꦛꦶ​ꦲꦭꦺꦴꦏꦱꦶ​ꦮꦼꦏ꧀ꦠꦸ​ꦥꦭꦶꦁ​ꦏꦛꦃ" data-lang-ar="الهوايات ذات التخصيص الزمني الأكبر">Hobi dengan alokasi waktu terbanyak</td>
+                                    <td class="p-3 border border-pink-200"><span data-lang-id="Memasak & Berkuliner" data-lang-en="Cooking & Culinary" data-lang-jv_latin="Masak & Kuliner" data-lang-jv_aksara="ꦩꦱꦏ꧀​ꦭꦤ꧀​ꦏꦸꦭꦶꦤꦺꦂ" data-lang-ar="الطبخ والطهي">Memasak & Berkuliner</span> (25%)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-center italic text-gray-500 mt-6" data-lang-id='"Badai pasti lewat, pelangi pasti datang."' data-lang-en='"The storm will surely pass, the rainbow will surely come."' data-lang-jv_latin='"Praha mesti liwat, kluwung mesti teka."' data-lang-jv_aksara="꧋ꦥꦿꦲ​ꦩꦼꦱ꧀ꦠꦶ​ꦭꦶꦮꦠ꧀꧈​ꦏ꧀ꦭꦸꦮꦸꦁ​ꦩꦼꦱ꧀ꦠꦶ​ꦠꦼꦏ꧉" data-lang-ar='"ستمر العاصفة بالتأكيد، وسيأتي قوس قزح بالتأكيد."'>"Badai pasti lewat, pelangi pasti datang."</p>
+                 </section>
+            </div>
+        </main>
+
+        <!-- 14. Footer -->
+        <footer class="text-center mt-12 pt-6 border-t border-dashed border-gray-300">
+            <p class="text-gray-500">&copy; 2024 Nor Maulidiyah. <span data-lang-id="Dibuat dengan sihir dan kode." data-lang-en="Made with magic and code." data-lang-jv_latin="Digawe kanthi sihir lan kode." data-lang-jv_aksara="ꦢꦶꦒꦮꦺ​ꦏꦤ꧀ꦛꦶ​ꦱꦶꦲꦶꦂ​ꦭꦤ꧀​ꦏꦺꦴꦢꦼ꧉" data-lang-ar="صنع بالسحر والبرمجة.">Dibuat dengan sihir dan kode.</span></p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- LANGUAGE DATA ---
+            const hobbyDataLang = {
+                id: {
+                    labels: ['Memasak', 'Berkuliner', 'Menggambar', 'Menyanyi', 'Nonton Anime'],
+                    title_pie: 'Distribusi Waktu Hobi',
+                    title_radar: 'Tingkat Minat Hobi (1-10)'
+                },
+                en: {
+                    labels: ['Cooking', 'Culinary', 'Drawing', 'Singing', 'Watching Anime'],
+                    title_pie: 'Hobby Time Distribution',
+                    title_radar: 'Hobby Interest Level (1-10)'
+                },
+                jv_latin: {
+                    labels: ['Masak', 'Kuliner', 'Nggambar', 'Nembang', 'Ndelok Anime'],
+                    title_pie: 'Distribusi Wektu Hobi',
+                    title_radar: 'Tingkat Minat Hobi (1-10)'
+                },
+                jv_aksara: { // Transliteration might not be perfect for chart labels
+                    labels: ['ꦩꦱꦏ꧀', 'ꦏꦸꦭꦶꦤꦺꦂ', 'ꦔ꧀ꦒꦩ꧀ꦧꦂ', 'ꦤꦼꦩ꧀ꦧꦁ', 'ꦤ꧀ꦢꦼꦭꦺꦴꦏ꧀​ꦲꦤꦶꦩꦺ'],
+                    title_pie: 'ꦢꦶꦱ꧀ꦠꦿꦶꦧꦸꦱꦶ​ꦮꦼꦏ꧀ꦠꦸ​ꦲꦺꦴꦧꦶ',
+                    title_radar: 'ꦠꦶꦁꦏꦠ꧀​ꦩꦶꦤꦠ꧀​ꦲꦺꦴꦧꦶ​꧑꧇꧑꧐'
+                },
+                ar: {
+                    labels: ['الطبخ', 'الطهي', 'الرسم', 'الغناء', 'مشاهدة الأنمي'],
+                    title_pie: 'توزيع وقت الهوايات',
+                    title_radar: 'مستوى الاهتمام بالهواية (1-10)'
+                }
+            };
+            
+            const activityDataLang = {
+                 id: {
+                    labels: ['Tidur', 'Sekolah', 'Belajar Mandiri', 'Hobi', 'Sosialisasi', 'Lain-lain'],
+                    title: 'Statistik Kegiatan Mingguan (Jam)'
+                },
+                en: {
+                    labels: ['Sleep', 'School', 'Self-study', 'Hobbies', 'Socializing', 'Others'],
+                    title: 'Weekly Activity Statistics (Hours)'
+                },
+                jv_latin: {
+                    labels: ['Sare', 'Sekolah', 'Sinau Dhewe', 'Hobi', 'Sosialisasi', 'Liyane'],
+                    title: 'Statistik Kagiyatan Minggon (Jam)'
+                },
+                 jv_aksara: {
+                    labels: ['ꦱꦫꦺ', 'ꦱꦼꦏꦺꦴꦭꦃ', 'ꦱꦶꦤꦲꦸ​ꦝꦺꦮꦺ', 'ꦲꦺꦴꦧꦶ', 'ꦱꦺꦴꦱꦶꦪꦭꦶꦱꦱꦶ', 'ꦭꦶꦪꦤꦺ'],
+                    title: 'ꦱ꧀ꦠꦠꦶꦱ꧀ꦠꦶꦏ꧀​ꦏꦒꦶꦪꦠꦤ꧀​ꦩꦶꦁꦒꦺꦴꦤ꧀'
+                },
+                ar: {
+                    labels: ['النوم', 'المدرسة', 'دراسة ذاتية', 'الهوايات', 'التواصل الاجتماعي', 'أخرى'],
+                    title: 'إحصائيات الأنشطة الأسبوعية (ساعات)'
+                }
+            };
+
+            const chartFont = {
+                family: 'Inter',
+                size: 12
+            };
+            
+            Chart.defaults.font.family = chartFont.family;
+            Chart.defaults.font.size = chartFont.size;
+            Chart.defaults.color = 'var(--text-ink)';
+
+            // --- HOBBIES PIE CHART ---
+            const hobbiesPieCtx = document.getElementById('hobbiesPieChart').getContext('2d');
+            const hobbiesPieChart = new Chart(hobbiesPieCtx, {
+                type: 'pie',
+                data: {
+                    labels: hobbyDataLang.id.labels,
+                    datasets: [{
+                        label: 'Persentase Hobi',
+                        data: [25, 25, 20, 15, 15], // Memasak, Berkuliner, Menggambar, Menyanyi, Nonton Anime
+                        backgroundColor: [
+                            '#ffb6c1', // Sakura Pink
+                            '#c3aed6', // Lavender
+                            '#87ceeb', // Sky Blue
+                            '#f0e68c', // Gold
+                            '#ff69b4'  // Hot Pink
+                        ],
+                        borderColor: 'var(--bg-paper)',
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        title: { display: true, text: hobbyDataLang.id.title_pie, font: { size: 16, family: 'Shippori Mincho' } }
+                    }
+                }
+            });
+
+            // --- HOBBIES RADAR CHART ---
+            const hobbiesRadarCtx = document.getElementById('hobbiesRadarChart').getContext('2d');
+            const hobbiesRadarChart = new Chart(hobbiesRadarCtx, {
+                type: 'radar',
+                data: {
+                    labels: hobbyDataLang.id.labels,
+                    datasets: [{
+                        label: 'Tingkat Minat',
+                        data: [8, 9, 9, 7, 8], // Sample interest levels (1-10)
+                        fill: true,
+                        backgroundColor: 'rgba(255, 182, 193, 0.2)',
+                        borderColor: 'rgba(255, 105, 180, 1)',
+                        pointBackgroundColor: 'rgba(255, 105, 180, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(255, 105, 180, 1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                     plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: hobbyDataLang.id.title_radar, font: { size: 16, family: 'Shippori Mincho' } }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(58, 58, 58, 0.2)' },
+                            grid: { color: 'rgba(58, 58, 58, 0.2)' },
+                            pointLabels: { font: { size: 12 } },
+                            ticks: {
+                                backdropColor: 'var(--bg-paper)',
+                                stepSize: 2
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 10
+                        }
+                    }
+                }
+            });
+
+            // --- ACTIVITY BAR CHART ---
+            const activityCtx = document.getElementById('activityChart').getContext('2d');
+            const activityChart = new Chart(activityCtx, {
+                type: 'bar',
+                data: {
+                    labels: activityDataLang.id.labels,
+                    datasets: [{
+                        label: 'Jam per Minggu',
+                        data: [56, 30, 10, 12, 7, 28],
+                        backgroundColor: 'rgba(184, 44, 74, 0.6)',
+                        borderColor: 'rgba(184, 44, 74, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: activityDataLang.id.title, font: { size: 16, family: 'Shippori Mincho' } }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: {
+                                drawOnChartArea: false
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: 'rgba(58, 58, 58, 0.1)'
+                            }
+                        }
+                    }
+                }
+            });
+
+
+            // --- LANGUAGE SWITCHER LOGIC ---
+            const langButtons = document.querySelectorAll('.lang-switcher button');
+            const translatableElements = document.querySelectorAll('[data-lang-id]');
+            const namaLengkapJawa = document.getElementById('nama-lengkap-jawa');
+            const namaLengkapArab = document.getElementById('nama-lengkap-arab');
+            const namaLengkapUtama = document.getElementById('nama-lengkap');
+            const statusSekolah = document.getElementById('status-sekolah');
+
+            const headerTranslations = {
+                 id: { name: "Nor Maulidiyah", status: "Siswi SMK Ma'arif NU Tirto" },
+                 en: { name: "Nor Maulidiyah", status: "Student at SMK Ma'arif NU Tirto" },
+                 jv_latin: { name: "Nor Maulidiyah", status: "Siswi ing SMK Ma'arif NU Tirto" },
+                 jv_aksara: { name: "ꦤꦺꦴꦂ​ꦩꦻꦴꦭꦶꦢꦶꦪꦃ", status: "ꦱꦶꦱ꧀ꦮꦶ​ꦲꦶꦁ​ꦱ꧀ꦩꦏ​ꦩꦄꦫꦶꦥ꦳꧀​ꦤꦸ​ꦠꦶꦂꦠ" },
+                 ar: { name: "نور مولودية", status: "طالبة في مدرسة المعارف نهضة العلماء المهنية تيرتو" }
+            };
+
+            langButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const selectedLang = button.getAttribute('data-lang');
+
+                    // Update active button
+                    langButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    document.documentElement.lang = selectedLang.split('_')[0];
+                    document.body.className = document.body.className.replace(/\b(lang-\S+)\b/g, '');
+                    document.body.classList.add(`lang-${selectedLang}`);
+
+                    // Update header text
+                    namaLengkapUtama.textContent = headerTranslations[selectedLang].name;
+                    statusSekolah.textContent = headerTranslations[selectedLang].status;
+                    
+                    // Show/hide special script names
+                    namaLengkapJawa.style.display = selectedLang === 'jv_aksara' ? 'block' : 'none';
+                    namaLengkapArab.style.display = selectedLang === 'ar' ? 'block' : 'none';
+                    namaLengkapUtama.style.direction = selectedLang === 'ar' ? 'rtl' : 'ltr';
+
+
+                    // Translate all elements with data attributes
+                    translatableElements.forEach(el => {
+                        const text = el.getAttribute(`data-lang-${selectedLang}`);
+                        if (text) {
+                            if (selectedLang === 'jv_aksara') {
+                                el.classList.add('aksara-jawa');
+                            } else {
+                                el.classList.remove('aksara-jawa');
+                            }
+                             if (selectedLang === 'ar') {
+                                el.classList.add('arabic');
+                            } else {
+                                el.classList.remove('arabic');
+                            }
+                            el.innerHTML = text;
+                        }
+                    });
+
+                    // Update Charts
+                    hobbiesPieChart.data.labels = hobbyDataLang[selectedLang].labels;
+                    hobbiesPieChart.options.plugins.title.text = hobbyDataLang[selectedLang].title_pie;
+                    hobbiesPieChart.update();
+
+                    hobbiesRadarChart.data.labels = hobbyDataLang[selectedLang].labels;
+                    hobbiesRadarChart.options.plugins.title.text = hobbyDataLang[selectedLang].title_radar;
+                    hobbiesRadarChart.update();
+                    
+                    activityChart.data.labels = activityDataLang[selectedLang].labels;
+                    activityChart.options.plugins.title.text = activityDataLang[selectedLang].title;
+                    activityChart.update();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
